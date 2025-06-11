@@ -41,6 +41,10 @@ select {
   font-family: 'MyCustomFontmedium';
   src: url('/home/aditya-gothiwarekar/client/public/assets/Quicksandfontone/static/Quicksand-Medium.ttf') format('truetype');
 }
+@font-face {
+  font-family: 'MyCustommuseo';
+    src: url('../public/assets/MuseoSans_500.otf') format('opentype');
+}
 
 * {
   box-sizing: border-box;
@@ -97,14 +101,14 @@ body {
   gap: 1.875rem; 
   flex: 1;
   justify-content: flex-end;
-  padding-right: 4rem;
+  padding-right: 1rem;
 }
 
 .top-icons {
   display: flex;
-  gap: 4rem;
+  gap: 0.756rem;
   justify-content: flex-end;
-  margin-right: 1.75rem;
+  margin-right: 0.756rem;
 }
 .top-icons img:active {
   height: 2rem;
@@ -119,13 +123,13 @@ body {
   font-size: 0.875rem; 
   padding-bottom: 0.3125rem;
   cursor: pointer;
-    font-size: 1.25rem;
+    font-size: 14px;
 }
 
 .top-nav a.active {
   color: #ffffff;
   border-bottom: 0.125rem solid #ffffff;
-  font-size: 1.25rem;
+  font-size: 14px;
 }
 
 .top-icons img {
@@ -171,7 +175,7 @@ body {
   height: 4rem; 
   margin-left: 6.25rem; 
   border-bottom: 1px solid #ccc;
-  font-size: 0.875rem; 
+  font-size: 12px;
 }
 
 .sort {
@@ -198,25 +202,45 @@ body {
   gap: 2rem; 
   padding: 1.25rem 2rem; 
   justify-content: center;
-  margin-left: 3.75rem; 
+  margin-left: 20.75rem; 
+  max-width: 1400px;
+  align-items: center;
+  margin-top: 5rem;
 }
 
 
 .course-card {
   display: flex;
   flex-direction: column;
-  width: 29.75rem; 
+  width: 476px;
+height: 246px;
   background-color: #fff;
-  padding: 0.75rem; 
+  padding-left: 0.75rem; 
+  padding-right:0.75rem ;
+  padding-top: 0.356rem;
+  padding-bottom: 0.356rem;
   box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1); 
   position: relative;
   gap: 0.625rem; 
   justify-content: space-between;
 }
+.expired-badge {
+  position: absolute;
+  top: -3px;
+  left: 0px;
+  background-color: #FFE4E6;
+  color: #D80000;
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  z-index: 1;
+  font-size: 10px;
+   font-family: "MyCustommuseo";
+}
+
 
 .fav-icon {
   position: absolute;
-  top: 2.220rem;
+  top: 1.22rem;
   right: 0.650rem; 
    width: 1.25rem;
   height: 1.5rem; 
@@ -229,6 +253,8 @@ body {
 .thumb-info-wrapper {
   display: flex;
   gap: 1.25rem; 
+  bottom: 0.865rem;
+  position: relative;
 }
 
 .course-thumb {
@@ -245,13 +271,16 @@ body {
   flex-direction: column;
   justify-content: space-between;
   flex: 1;
-  padding: 0.625rem 0; 
+  padding-top: 0.625rem;
+  padding-bottom: 0.356rem;
 }
 
 .course-info h3 {
   font-size: 1rem; 
   color: #222;
   margin-bottom: 0.3125rem; 
+  font-size: 16px !important;
+  padding-right: 20px !important;
 }
 
 .course-info p {
@@ -430,9 +459,12 @@ body {
     justify-content: center;
     gap: 0.90rem;
   }
-
-  .stats-bar,
-  .filter-bar {
+  .filter-bar{
+     flex-wrap: wrap;
+        height: auto;
+        padding: 0.5rem 0
+  }
+  .stats-bar {
     gap: 1rem;
     width: 100%;
     margin-left: 0;
@@ -442,6 +474,9 @@ body {
   .course-card {
     width: 571px;
 height: auto;
+  }
+  .course-grid{
+    margin-top: 2rem !important;
   }
 .mobile-menu {
   display: flex;
@@ -529,7 +564,7 @@ height: auto;
 /* Desktop nav links visible on large screens */
 .nav-links-desktop {
   display: flex;
-  gap: 4rem;
+  gap: 2rem;
 }
 
 /* Hide hamburger on desktop */
@@ -632,6 +667,7 @@ height: auto;
   padding: 2px 5px;
   border-radius: 50%;
   line-height: 1;
+  font-family: "MyCustommuseo";
 }
 
 @media (max-width: 820px) {
@@ -687,10 +723,304 @@ height: 288px;
 }
 .fav-icon {
   position: absolute;
-  top: 2.220rem;
+  top: 1.22rem;
   right: 0.650rem; 
-   width: 0.625rem;
-  height: 0.625rem; 
+   width: 20px;
+height: 24px;
   cursor: pointer;
 }
+.course-card{
+  width: 571px;
+height: auto;
+}
+}
+/* Hamburger Dropdown Menu Container */
+.hamburger-dropdown-container {
+  position: absolute;
+  top: 72px; 
+  right: 16px;
+  width: 280px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
+  z-index: 9999;
+  height: auto;
+  overflow-y: auto;
+  color: white;
+  font-size: 1rem;
+}
+
+/* Dropdown Item */
+.dropdown-item {
+  color: #1F7A54;
+  font-family: 'MyCustomFontmedium';
+  font-size: 14px;
+  opacity: 1;
+  background-color: #fafafa;
+}
+
+.dropdown-item a {
+  color: #000000;
+  opacity: 1;
+  text-decoration: none;
+  display: block;
+  padding: 12px 16px;
+  user-select: none;
+}
+
+.dropdown-item a:hover {
+  background-color: #f0f0f0;
+  color: #007bff; /* Highlight on hover */
+}
+
+/* Dropdown Label */
+.dropdown-label {
+  padding: 17px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  color: #1F7A54;
+  font-family: 'MyCustomFontmedium';
+  opacity: 1;
+  cursor: pointer;
+  margin-top: -1px;
+  background-color: white;
+}
+
+.dropdown-label:hover {
+  background-color: #f0f0f0;
+}
+
+/* Arrow */
+.dropdown-arrow {
+  font-size: 0.7rem;
+  margin-left: 8px;
+}
+
+/* Submenu */
+.dropdown-submenu {
+  background-color: #F3F3F3;
+  padding-left: 12px;
+  color: #1F7A54;
+  font-family: 'MyCustomFontmedium';
+  font-size: 14px;
+  opacity: 1;
+}
+
+/* Submenu Item */
+.submenu-item {
+  padding: 8px 16px;
+  user-select: none;
+  
+  opacity: 1;
+  cursor: pointer;
+}
+
+.submenu-item:hover .submenu-label,
+.submenu-simple-item:hover {
+  background-color: #e1eaff;
+  cursor: pointer;
+}
+
+/* Submenu Label */
+.submenu-label {
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #000000;
+  opacity: 1;
+}
+
+/* Submenu Simple Item */
+.submenu-simple-item {
+  padding: 6px 16px;
+  color: #1F7A54;
+  font-family: 'MyCustomFontmedium';
+  opacity: 1;
+  cursor: pointer;
+}
+
+/* Sub-submenu */
+.subsubmenu-menu {
+  background-color: #F3F3F3;
+  padding-left: 12px;
+  color: #1F7A54;
+  font-family: 'MyCustomFontmedium';
+  opacity: 1;
+}
+
+/* Sub-submenu Item */
+.subsubmenu-item {
+  padding: 6px 16px;
+  user-select: none;
+  color: #000000;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.subsubmenu-item:hover {
+  background-color: #F3F3F3;
+  cursor: pointer;
+}
+
+/* Adjust hamburger icon cursor */
+.hamburger-dropdown-menu {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+@media (min-width: 769px) {
+  .hamburger-dropdown-menu {
+    display: none !important;
+  }
+}
+
+/* Show hamburger icon on mobile */
+@media (max-width: 768px) {
+  .hamburger-dropdown-menu {
+    display: block;
+  }
+}
+.hamburger-dropdown-menu:hover + .hamburger-dropdown-container {
+  display: block;
+}
+.announcement-dropdown{
+    position: absolute;
+    top: 46px;
+    right: -86px;
+    gap: 2rem;
+    padding: 5px;
+width: 315px;
+  max-height: 300px;
+  background-color: #FFFFFF;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 6px;
+  overflow-y: auto;
+  z-index: 1100;
+  font-family: 'Arial', sans-serif;
+  color: black;
+  
+}
+.announcement-dropdown.updated-announcements {
+  position: fixed;
+  top: 60px; /* adjust based on your header/nav height */
+  right: 20px;
+  width: 360px;
+  max-height: 70vh;
+  overflow-y: auto;
+  background-color: white;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  border-radius: 10px;
+  z-index: 9999; /* make sure it's above other content */
+  padding: 1rem;
+  overflow-y: scroll; /* Enables vertical scroll */
+  scrollbar-width: auto; /* For Firefox */
+  scrollbar-color: #888 #f1f1f1; /* Optional scrollbar color */
+}
+
+
+/* Announcement Item */
+.announcement-item {
+  padding: 12px 16px;
+  border-bottom: 1px solid #eaeaea;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.announcement-item:last-child {
+  border-bottom: none;
+}
+
+.announcement-item:hover {
+  background-color: #f5f5f5;
+}
+
+/* Announcement Title */
+.announcement-title {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #333333;
+  margin-bottom: 4px;
+}
+
+/* Announcement Description */
+.announcement-desc {
+  font-size: 0.875rem;
+  color: #666666;
+}
+
+/* Scrollbar styles for webkit browsers */
+.announcement-dropdown-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.announcement-dropdown-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 6px;
+}
+
+.announcement-dropdown-container::-webkit-scrollbar-thumb {
+  background-color: #cccccc;
+  border-radius: 6px;
+}
+.updated-announcements {
+  background: white;
+  border: 1px solid #ddd;
+  width: 350px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  overflow-y: auto;
+  max-height: 400px;
+  padding: 10px 0;
+  position: absolute;
+  right: 0;
+  top: 40px;
+  z-index: 1000;
+}
+
+.announcement-item-styled {
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid #eee;
+}
+
+.announcement-text {
+  flex: 1;
+  font-size: 0.85rem;
+}
+
+.announcement-text .desc {
+  color: #555;
+  margin: 2px 0;
+}
+
+.announcement-text .timestamp {
+  color: gray;
+  font-size: 0.75rem;
+  margin-top: 4px;
+}
+
+.announcement-status-icon {
+  font-size: 1.2rem;
+  margin-left: 10px;
+}
+
+.announcement-actions {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  border-top: 1px solid #eee;
+}
+
+.show-all-btn,
+.create-new-btn {
+  background: none;
+  border: none;
+  color: #0b8b8d;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 0.9rem;
 }

@@ -9,6 +9,9 @@ const Dashboard = () => {
   const [openSubDropdown, setOpenSubDropdown] = useState<number | null>(null);
   const [isAnnouncementOpen, setIsAnnouncementOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const [hoveredIcon, setHoveredIcon] = useState<"alert" | "announcement" | null>(null);
+
 
 
   const navItems = [
@@ -40,117 +43,124 @@ const Dashboard = () => {
     },
   ];
 
- const announcements = [
-    {
-      id: 1,
-      title: "No classes will be held on 21st Nov",
-      pa: "PA: Wilson Kumar",
-      attachment: "2 files are attached",
-      date: "15-Sep-2018 at 07:21 pm",
-      seen: true,
-    },
-    {
-      id: 2,
-      title: "Guest lecture on Geometry on 20th September",
-      pa: "PA: Samson White",
-      attachment: "2 files are attached",
-      date: "15-Sep-2018 at 07:21 pm",
-      seen: false,
-    },
-    {
-      id: 3,
-      title: "Additional course materials available on request",
-      pa: "PA: Wilson Kumar",
-      course: "Mathematics 101",
-      date: "15-Sep-2018 at 07:21 pm",
-      seen: true,
-    },
-    {
-      id: 4,
-      title: "No classes will be held on 25th Dec",
-      pa: "PA: Wilson Kumar",
-      date: "15-Sep-2018 at 07:21 pm",
-      seen: false,
-    },
-    {
-      id: 5,
-      title: "Additional course materials available on request",
-      pa: "PA: Wilson Kumar",
-      course: "Mathematics 101",
-      date: "15-Sep-2018 at 07:21 pm",
-      seen: false,
-    },
-  ];
+//  const announcements = [
+//     {
+//       id: 1,
+//       title: "No classes will be held on 21st Nov",
+//       pa: "PA: Wilson Kumar",
+//       attachment: "2 files are attached",
+//       date: "15-Sep-2018 at 07:21 pm",
+//       seen: true,
+//     },
+//     {
+//       id: 2,
+//       title: "Guest lecture on Geometry on 20th September",
+//       pa: "PA: Samson White",
+//       attachment: "2 files are attached",
+//       date: "15-Sep-2018 at 07:21 pm",
+//       seen: false,
+//     },
+//     {
+//       id: 3,
+//       title: "Additional course materials available on request",
+//       pa: "PA: Wilson Kumar",
+//       course: "Mathematics 101",
+//       date: "15-Sep-2018 at 07:21 pm",
+//       seen: true,
+//     },
+//     {
+//       id: 4,
+//       title: "No classes will be held on 25th Dec",
+//       pa: "PA: Wilson Kumar",
+//       date: "15-Sep-2018 at 07:21 pm",
+//       seen: false,
+//     },
+//     {
+//       id: 5,
+//       title: "Additional course materials available on request",
+//       pa: "PA: Wilson Kumar",
+//       course: "Mathematics 101",
+//       date: "15-Sep-2018 at 07:21 pm",
+//       seen: false,
+//     },
+//   ];
 
-  const toggleAnnouncements = () => {
-    setIsAnnouncementOpen(!isAnnouncementOpen);
-    if (!isAnnouncementOpen) {
-      setIsMenuOpen(false);
-      setOpenDropdown(null);
-      setOpenSubDropdown(null);
-    }
-  };
+  // const toggleAnnouncements = () => {
+  //   setIsAnnouncementOpen(!isAnnouncementOpen);
+  //   if (!isAnnouncementOpen) {
+  //     setIsMenuOpen(false);
+  //     setOpenDropdown(null);
+  //     setOpenSubDropdown(null);
+  //     setIsAlertOpen(false);
+  //   }
+  // };
 
   const courses = [
-    {
-      img: "imageMask-1.svg",
-      title: "Acceleration",
-      desc: "Physics | Grade 7 +2",
-      units: 4,
-      lessons: 18,
-      topics: 24,
-      class: "Mr. Frank's Class B",
-      date: "21-Jan-2020 to 21-Aug-2020",
-      students: "50",
-      expired: false,
-    },
-    {
-      img: "imageMask-2.svg",
-      title: "Displacement, Velocity and Speed",
-      desc: "Physics | Grade 6 +3",
-      units: 2,
-      lessons: 15,
-      topics: 20,
-      class: "No Classes",
-      expired: false,
-    },
-    {
-      img: "imageMask.svg",
-      title: "Introduction to Biology: Micro organisms and how they affect",
-      desc: "Biology | Grade 4 +1",
-      units: 5,
-      lessons: 16,
-      topics: 22,
-      class: "All Classes",
-      students: "300",
-      expired: false,
-    },
-    {
-      img: "imageMask-3.svg",
-      title: "Introduction to High School Mathematics",
-      desc: "Mathematics | Grade 8 +3",
-      units: "--",
-      lessons: "",
-      topics: "",
-      class: "Mr. Frank's Class A",
-      date: "14-Oct-2019 to 20-Oct-2020",
-      students: "44",
-      expired: true,
-    },
-  ];
-  const notifications = [
+  {
+    img: "imageMask-1.svg",
+    title: "Acceleration",
+    desc: "Physics",
+    grades: [7, 2],
+    units: 4,
+    lessons: 18,
+    topics: 24,
+    class: "Mr. Frank's Class B",
+    date: "21-Jan-2020 to 21-Aug-2020",
+    students: "50",
+    expired: false,
+  },
+  {
+    img: "imageMask-2.svg",
+    title: "Displacement, Velocity and Speed",
+    desc: "Physics",
+    grades: [6, 3],
+    units: 2,
+    lessons: 15,
+    topics: 20,
+    class: "No Classes",
+    expired: false,
+  },
+  {
+    img: "imageMask.svg",
+    title: "Introduction to Biology: Micro organisms and how they affect",
+    desc: "Biology",
+    grades: [4, 1],
+    units: 5,
+    lessons: 16,
+    topics: 22,
+    class: "All Classes",
+    students: "300",
+    expired: false,
+  },
+  {
+    img: "imageMask-3.svg",
+    title: "Introduction to High School Mathematics",
+    desc: "Mathematics",
+    grades: [8, 3],
+    units: "--",
+    lessons: "",
+    topics: "",
+    class: "Mr. Frank's Class A",
+    date: "14-Oct-2019 to 20-Oct-2020",
+    students: "44",
+    expired: true,
+  },
+];
+
+  const alerts = [
   {
     id: 1,
     title: "License for Introduction to Algebra has been assigned to your school",
     timestamp: "15-Sep-2018 at 07:21 pm",
-    icon: "circle",
+    icon: "tick",
   },
   {
     id: 2,
     title: "Lesson 3 Practice Worksheet overdue for Amy Santiago",
-    subtext: "Course: Advanced Mathematics",
+    label: "Course",
+    desc: "Advanced Mathematics",
     timestamp: "15-Sep-2018 at 05:21 pm",
-    icon: "tick",
+    icon: "circle",
   },
   {
     id: 3,
@@ -161,7 +171,8 @@ const Dashboard = () => {
   {
     id: 4,
     title: "15 submissions ready for evaluation",
-    subtext: "Class: Basics of Algebra",
+    label: "Class",
+    desc: "Basics of Algebra",
     timestamp: "13-Sep-2018 at 01:15 pm",
     icon: "circle",
   },
@@ -169,17 +180,50 @@ const Dashboard = () => {
     id: 5,
     title: "License for Basic Concepts in Geometry has been assigned to your...",
     timestamp: "15-Sep-2018 at 07:21 pm",
-    icon: "circle",
+    icon: "tick",
   },
   {
     id: 6,
     title: "Lesson 3 Practice Worksheet overdue for Sam Diego",
-    subtext: "Course: Advanced Mathematics",
-    timestamp: "15-Sep-2018 at 05:21 pm",
+    label: "Course",
+    desc: "Advanced Mathematics",
+    timestamp: "15-Sep-2018 at 07:21 pm",
     icon: "tick",
   },
 ];
 
+const toggleAlerts = () => {
+  const newState = !isAlertOpen;
+  setIsAlertOpen(newState);
+  if (newState) {
+    setIsAnnouncementOpen(false);
+    setIsMenuOpen(false);
+    setOpenDropdown(null);
+    setOpenSubDropdown(null);
+  }
+};
+
+const toggleAnnouncements = () => {
+  const newState = !isAnnouncementOpen;
+  setIsAnnouncementOpen(newState);
+  if (newState) {
+    setIsAlertOpen(false);
+    setIsMenuOpen(false);
+    setOpenDropdown(null);
+    setOpenSubDropdown(null);
+  }
+};
+
+const toggleMenu = () => {
+  const newState = !isMenuOpen;
+  setIsMenuOpen(newState);
+  if (newState) {
+    setIsAlertOpen(false);
+    setIsAnnouncementOpen(false);
+    setOpenDropdown(null);
+    setOpenSubDropdown(null);
+  }
+};
 
   const toggleDropdown = (index: number) => {
     if (openDropdown === index) {
@@ -198,15 +242,6 @@ const Dashboard = () => {
       setOpenSubDropdown(index);
     }
   };
-  const toggleNotifications = () => {
-  setIsNotificationOpen(!isNotificationOpen);
-  if (!isNotificationOpen) {
-    setIsMenuOpen(false);
-    setIsAnnouncementOpen(false);
-    setOpenDropdown(null);
-    setOpenSubDropdown(null);
-  }
-};
 
 
   return (
@@ -237,99 +272,157 @@ const Dashboard = () => {
               </div>
             </nav>
             <div className="top-icons" style={{ position: "relative" }}>
-              <div className="icon-with-badge">
-                <img src="assets/icons/alerts.svg" alt="Notifications" />
-                <span className="badge">1</span>
-              </div>
-
-              {/* Announcement Icon */}
-               <div
-        className="icon-with-badge"
-        style={{ cursor: "pointer", position: "relative" }}
-        onClick={toggleAnnouncements}
-      >
-        <img
-      src={
-        isAnnouncementOpen
-          ? "assets/icons/icons8-announcement-30.svg"
-          : "assets/icons/announcements.svg"
-      }
-    alt="Announcements"
+              <div className="icon-with-badge" onClick={toggleAlerts}>
+                <img
+    src={
+      isAlertOpen
+        ? "assets/images/icons8-notification.svg"
+        : "assets/icons/alerts.svg"
+    }
+    alt="Notifications"
   />
-        {!isAnnouncementOpen && <span className="badge">2</span>}
-
-        {isAnnouncementOpen && (
-  <div className="announcement-dropdown updated-announcements">
-    {[
-      {
-        id: 1,
-        sender: "PA: Wilson Kumar",
-        title: "No classes will be held on 21st Nov",
-        desc: "2 files are attached",
-        timestamp: "15-Sep-2018 at 07:21 pm",
-        icon: "tick",
-      },
-      {
-        id: 2,
-        sender: "PA: Samson White",
-        title: "Guest lecture on Geometry on 20th September",
-        desc: "2 files are attached",
-        timestamp: "15-Sep-2018 at 07:21 pm",
-        icon: "circle",
-      },
-      {
-        id: 3,
-        sender: "PA: Wilson Kumar",
-        title: "Additional course materials available on request",
-        desc: "Course: Mathematics 101",
-        timestamp: "15-Sep-2018 at 07:21 pm",
-        icon: "tick",
-      },
-      {
-        id: 4,
-        sender: "PA: Wilson Kumar",
-        title: "No classes will be held on 25th Dec",
-        desc: "",
-        timestamp: "15-Sep-2018 at 07:21 pm",
-        icon: "circle",
-      },
-      {
-        id: 5,
-        sender: "PA: Wilson Kumar",
-        title: "Additional course materials available on request",
-        desc: "Course: Mathematics 101",
-        timestamp: "15-Sep-2018 at 07:21 pm",
-        icon: "circle",
-      },
-    ].map((announcement) => (
-  <div key={announcement.id} className="announcement-item-styled">
-    <div className="announcement-text">
-      <strong>{announcement.sender}</strong>
-      <div>{announcement.title}</div>
-      {announcement.desc && <div className="desc">{announcement.desc}</div>}
-      <div className="timestamp">{announcement.timestamp}</div>
+                {!isAlertOpen && <span className="badge">1</span>}
+                {isAlertOpen && (
+  <div className="alert-dropdown-menu">
+    <div className="alert-scrollable">
+      {alerts.map((alert, idx) => (
+        <div
+          key={alert.id}
+          className={`alert-card ${[1, 3, 5].includes(idx) ? 'highlight' : ''}`}
+        >
+          <div className="alert-title">{alert.title}</div>
+          {alert.desc && (
+            <div className="alert-subtext">
+              {alert.label}: <span className="alert-value">{alert.desc}</span>
+            </div>
+          )}
+          <img
+            src={
+              alert.icon === "tick"
+                ? "/assets/images/tick.svg"
+                : "/assets/images/untick.svg"
+            }
+            className="alert-status"
+            alt="status"
+          />
+          <div className="alert-time">{alert.timestamp}</div>
+        </div>
+      ))}
     </div>
-    <div className="announcement-status-icon">
-      <img
-        src={
-          announcement.icon === "tick"
-            ? "/assets/images/tick.svg"
-            : "/assets/images/untick.svg"
-        }
-        alt={announcement.icon}
-        className="announcement-icon"
-      />
-    </div>
-  </div>
-))}
-
-    <div className="announcement-actions">
+    <div className="alert-footer">
       <button className="show-all-btn">SHOW ALL</button>
-      <button className="create-new-btn">CREATE NEW</button>
     </div>
   </div>
 )}
+              </div>
+
+              {/* Announcement Icon */}
+              <div
+  className="icon-with-badge"
+  style={{ cursor: "pointer", position: "relative" }}
+  onClick={toggleAnnouncements}
+>
+  <img
+    src={
+      isAnnouncementOpen
+        ? "assets/icons/icons8-announcement-30.svg"
+        : "assets/icons/announcements.svg"
+    }
+    alt="Announcements"
+  />
+  {!isAnnouncementOpen && <span className="badge">2</span>}
+
+  {isAnnouncementOpen && (
+    <div className="announcement-dropdown">
+      <div className="announcement-scrollable">
+        {[
+          {
+            id: 1,
+            sender: "PA: Wilson Kumar",
+            title: "No classes will be held on 21st Nov",
+            desc: "2 files are attached",
+            timestamp: "15-Sep-2018 at 07:21 pm",
+            icon: "tick",
+          },
+          {
+            id: 2,
+            sender: "PA: Samson White",
+            title: "Guest lecture on Geometry on 20th September",
+            desc: "2 files are attached",
+            timestamp: "15-Sep-2018 at 07:21 pm",
+            icon: "circle",
+            highlight: true,
+          },
+          {
+            id: 3,
+            sender: "PA: Wilson Kumar",
+            title: "Additional course materials available on request",
+            desc: "Course: Mathematics 101",
+            timestamp: "15-Sep-2018 at 07:21 pm",
+            icon: "tick",
+          },
+          {
+            id: 4,
+            sender: "PA: Wilson Kumar",
+            title: "No classes will be held on 25th Dec",
+            desc: "",
+            timestamp: "15-Sep-2018 at 07:21 pm",
+            icon: "circle",
+            highlight: true,
+          },
+          {
+            id: 5,
+            sender: "PA: Wilson Kumar",
+            title: "Additional course materials available on request",
+            desc: "Course: Mathematics 101",
+            timestamp: "15-Sep-2018 at 07:21 pm",
+            icon: "circle",
+            highlight: true,
+          },
+        ].map((a) => (
+          <div
+            key={a.id}
+            className={`announcement-item ${a.highlight ? "highlight" : ""}`}
+          >
+            <div className="announcement-text">
+             <div className="announcement-sender">{a.sender}</div>
+              <div className="announcement-title">{a.title}</div>
+
+              <div className="announcement-meta">
+                {a.desc ? (
+                  <span className="attachment-info">
+                    <img
+                      src="/assets/images/attachment-svgrepo-com.svg"
+                      alt="attachment"
+                      className="clip-icon"
+                    />
+                    {a.desc}
+                  </span>
+                ) : (
+                  <span></span>
+                )}
+                <span className="timestamp">{a.timestamp}</span>
+              </div>
+            </div>
+            <img
+              src={
+                a.icon === "tick"
+                  ? "/assets/images/tick.svg"
+                  : "/assets/images/untick.svg"
+              }
+              alt={a.icon}
+              className="announcement-icon"
+            />
+          </div>
+        ))}
       </div>
+      <div className="announcement-actions">
+        <button className="show-all-btn">SHOW ALL</button>
+        <button className="create-new-btn">CREATE NEW</button>
+      </div>
+    </div>
+  )}
+</div>
 
 
               <div className="icon-with-badge">
@@ -350,12 +443,19 @@ const Dashboard = () => {
               {/* Hamburger menu */}
               <div
                 className="hamburger-dropdown-menu"
-                onClick={() => {
-                  setIsMenuOpen(!isMenuOpen);
-                  setIsAnnouncementOpen(false); // close announcements if hamburger opens
-                }}
+                
+onClick={toggleMenu}
+
               >
-                <img src="assets/icons/hamburger-menu.svg" alt="Menu" />
+                <img
+    src={
+      isMenuOpen
+        ? "assets/images/icons8-menu.svg"
+        : "assets/icons/hamburger-menu.svg"
+    }
+    alt="Menu"
+  /> 
+
               </div>
             </div>
           </div>
@@ -490,20 +590,17 @@ const Dashboard = () => {
                 <div className="course-info">
                   <h3>{course.title}</h3>
                   <p>
-                    {(() => {
-                      const match = course.desc.match(/(.+?)(\s\+\d+)/);
-                      if (match) {
-                        return (
-                          <>
-                            {match[1]}{" "}
-                            <span className="highlight-plus">{match[2]}</span>
-                          </>
-                        );
-                      } else {
-                        return course.desc;
-                      }
-                    })()}
-                  </p>
+  {course.desc} |{" "}
+  {course.grades && course.grades.length > 0 && (
+    <>
+      Grade {course.grades.map((grade, i) => (
+        <span key={i} className={i > 0 ? "highlight-plus" : ""}>
+          {i > 0 ? `+${grade}` : grade}
+        </span>
+      ))}
+    </>
+  )}
+</p>
                   <p>
                     {course.units !== "--" ? (
                       <>

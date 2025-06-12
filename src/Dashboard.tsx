@@ -1,20 +1,54 @@
 import React, { useState } from "react";
 import "./dashboard.css";
 
-const Dashboard = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [activeStat, setActiveStat] = useState("courses");
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+interface SubSubItem {
+  label: string;
+}
+
+interface SubItem {
+  label: string;
+  subSubItems?: SubSubItem[];
+}
+
+interface NavItem {
+  label: string;
+  subItems: SubItem[];
+}
+
+interface Course {
+  img: string;
+  title: string;
+  desc: string;
+  grades: number[];
+  units: number | string;
+  lessons: number | string;
+  topics: number | string;
+  class: string;
+  date?: string;
+  students?: string;
+  expired: boolean;
+}
+
+interface Alert {
+  id: number;
+  title: string;
+  label?: string;
+  desc?: string;
+  timestamp: string;
+  icon: "tick" | "circle";
+}
+
+const Dashboard: React.FC = () => {
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [activeStat, setActiveStat] = useState<"courses" | "classes">("courses");
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
   const [openSubDropdown, setOpenSubDropdown] = useState<number | null>(null);
-  const [isAnnouncementOpen, setIsAnnouncementOpen] = useState(false);
-  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
-  const [isAlertOpen, setIsAlertOpen] = useState(false);
-  const [hoveredIcon, setHoveredIcon] = useState<"alert" | "announcement" | null>(null);
+  const [isAnnouncementOpen, setIsAnnouncementOpen] = useState<boolean>(false);
+  const [isNotificationOpen, setIsNotificationOpen] = useState<boolean>(false);
+  const [isAlertOpen, setIsAlertOpen] = useState<boolean>(false);
 
-
-
-  const navItems = [
+  const navItems: NavItem[] = [
     {
       label: "DASHBOARD",
       subItems: [{ label: "Overview" }, { label: "Stats" }],
@@ -43,206 +77,144 @@ const Dashboard = () => {
     },
   ];
 
-//  const announcements = [
-//     {
-//       id: 1,
-//       title: "No classes will be held on 21st Nov",
-//       pa: "PA: Wilson Kumar",
-//       attachment: "2 files are attached",
-//       date: "15-Sep-2018 at 07:21 pm",
-//       seen: true,
-//     },
-//     {
-//       id: 2,
-//       title: "Guest lecture on Geometry on 20th September",
-//       pa: "PA: Samson White",
-//       attachment: "2 files are attached",
-//       date: "15-Sep-2018 at 07:21 pm",
-//       seen: false,
-//     },
-//     {
-//       id: 3,
-//       title: "Additional course materials available on request",
-//       pa: "PA: Wilson Kumar",
-//       course: "Mathematics 101",
-//       date: "15-Sep-2018 at 07:21 pm",
-//       seen: true,
-//     },
-//     {
-//       id: 4,
-//       title: "No classes will be held on 25th Dec",
-//       pa: "PA: Wilson Kumar",
-//       date: "15-Sep-2018 at 07:21 pm",
-//       seen: false,
-//     },
-//     {
-//       id: 5,
-//       title: "Additional course materials available on request",
-//       pa: "PA: Wilson Kumar",
-//       course: "Mathematics 101",
-//       date: "15-Sep-2018 at 07:21 pm",
-//       seen: false,
-//     },
-//   ];
+  const courses: Course[] = [
+    {
+      img: "imageMask-1.svg",
+      title: "Acceleration",
+      desc: "Physics",
+      grades: [7, 2],
+      units: 4,
+      lessons: 18,
+      topics: 24,
+      class: "Mr. Frank's Class B",
+      date: "21-Jan-2020 to 21-Aug-2020",
+      students: "50",
+      expired: false,
+    },
+    {
+      img: "imageMask-2.svg",
+      title: "Displacement, Velocity and Speed",
+      desc: "Physics",
+      grades: [6, 3],
+      units: 2,
+      lessons: 15,
+      topics: 20,
+      class: "No Classes",
+      expired: false,
+    },
+    {
+      img: "imageMask.svg",
+      title: "Introduction to Biology: Micro organisms and how they affect",
+      desc: "Biology",
+      grades: [4, 1],
+      units: 5,
+      lessons: 16,
+      topics: 22,
+      class: "All Classes",
+      students: "300",
+      expired: false,
+    },
+    {
+      img: "imageMask-3.svg",
+      title: "Introduction to High School Mathematics",
+      desc: "Mathematics",
+      grades: [8, 3],
+      units: "--",
+      lessons: "",
+      topics: "",
+      class: "Mr. Frank's Class A",
+      date: "14-Oct-2019 to 20-Oct-2020",
+      students: "44",
+      expired: true,
+    },
+  ];
 
-  // const toggleAnnouncements = () => {
-  //   setIsAnnouncementOpen(!isAnnouncementOpen);
-  //   if (!isAnnouncementOpen) {
-  //     setIsMenuOpen(false);
-  //     setOpenDropdown(null);
-  //     setOpenSubDropdown(null);
-  //     setIsAlertOpen(false);
-  //   }
-  // };
+  const alerts: Alert[] = [
+    {
+      id: 1,
+      title: "License for Introduction to Algebra has been assigned to your school",
+      timestamp: "15-Sep-2018 at 07:21 pm",
+      icon: "tick",
+    },
+    {
+      id: 2,
+      title: "Lesson 3 Practice Worksheet overdue for Amy Santiago",
+      label: "Course",
+      desc: "Advanced Mathematics",
+      timestamp: "15-Sep-2018 at 05:21 pm",
+      icon: "circle",
+    },
+    {
+      id: 3,
+      title: "23 new students created",
+      timestamp: "14-Sep-2018 at 01:21 pm",
+      icon: "circle",
+    },
+    {
+      id: 4,
+      title: "15 submissions ready for evaluation",
+      label: "Class",
+      desc: "Basics of Algebra",
+      timestamp: "13-Sep-2018 at 01:15 pm",
+      icon: "circle",
+    },
+    {
+      id: 5,
+      title: "License for Basic Concepts in Geometry has been assigned to your...",
+      timestamp: "15-Sep-2018 at 07:21 pm",
+      icon: "tick",
+    },
+    {
+      id: 6,
+      title: "Lesson 3 Practice Worksheet overdue for Sam Diego",
+      label: "Course",
+      desc: "Advanced Mathematics",
+      timestamp: "15-Sep-2018 at 07:21 pm",
+      icon: "tick",
+    },
+  ];
 
-  const courses = [
-  {
-    img: "imageMask-1.svg",
-    title: "Acceleration",
-    desc: "Physics",
-    grades: [7, 2],
-    units: 4,
-    lessons: 18,
-    topics: 24,
-    class: "Mr. Frank's Class B",
-    date: "21-Jan-2020 to 21-Aug-2020",
-    students: "50",
-    expired: false,
-  },
-  {
-    img: "imageMask-2.svg",
-    title: "Displacement, Velocity and Speed",
-    desc: "Physics",
-    grades: [6, 3],
-    units: 2,
-    lessons: 15,
-    topics: 20,
-    class: "No Classes",
-    expired: false,
-  },
-  {
-    img: "imageMask.svg",
-    title: "Introduction to Biology: Micro organisms and how they affect",
-    desc: "Biology",
-    grades: [4, 1],
-    units: 5,
-    lessons: 16,
-    topics: 22,
-    class: "All Classes",
-    students: "300",
-    expired: false,
-  },
-  {
-    img: "imageMask-3.svg",
-    title: "Introduction to High School Mathematics",
-    desc: "Mathematics",
-    grades: [8, 3],
-    units: "--",
-    lessons: "",
-    topics: "",
-    class: "Mr. Frank's Class A",
-    date: "14-Oct-2019 to 20-Oct-2020",
-    students: "44",
-    expired: true,
-  },
-];
-
-  const alerts = [
-  {
-    id: 1,
-    title: "License for Introduction to Algebra has been assigned to your school",
-    timestamp: "15-Sep-2018 at 07:21 pm",
-    icon: "tick",
-  },
-  {
-    id: 2,
-    title: "Lesson 3 Practice Worksheet overdue for Amy Santiago",
-    label: "Course",
-    desc: "Advanced Mathematics",
-    timestamp: "15-Sep-2018 at 05:21 pm",
-    icon: "circle",
-  },
-  {
-    id: 3,
-    title: "23 new students created",
-    timestamp: "14-Sep-2018 at 01:21 pm",
-    icon: "circle",
-  },
-  {
-    id: 4,
-    title: "15 submissions ready for evaluation",
-    label: "Class",
-    desc: "Basics of Algebra",
-    timestamp: "13-Sep-2018 at 01:15 pm",
-    icon: "circle",
-  },
-  {
-    id: 5,
-    title: "License for Basic Concepts in Geometry has been assigned to your...",
-    timestamp: "15-Sep-2018 at 07:21 pm",
-    icon: "tick",
-  },
-  {
-    id: 6,
-    title: "Lesson 3 Practice Worksheet overdue for Sam Diego",
-    label: "Course",
-    desc: "Advanced Mathematics",
-    timestamp: "15-Sep-2018 at 07:21 pm",
-    icon: "tick",
-  },
-];
-
-const toggleAlerts = () => {
-  const newState = !isAlertOpen;
-  setIsAlertOpen(newState);
-  if (newState) {
-    setIsAnnouncementOpen(false);
-    setIsMenuOpen(false);
-    setOpenDropdown(null);
-    setOpenSubDropdown(null);
-  }
-};
-
-const toggleAnnouncements = () => {
-  const newState = !isAnnouncementOpen;
-  setIsAnnouncementOpen(newState);
-  if (newState) {
-    setIsAlertOpen(false);
-    setIsMenuOpen(false);
-    setOpenDropdown(null);
-    setOpenSubDropdown(null);
-  }
-};
-
-const toggleMenu = () => {
-  const newState = !isMenuOpen;
-  setIsMenuOpen(newState);
-  if (newState) {
-    setIsAlertOpen(false);
-    setIsAnnouncementOpen(false);
-    setOpenDropdown(null);
-    setOpenSubDropdown(null);
-  }
-};
-
-  const toggleDropdown = (index: number) => {
-    if (openDropdown === index) {
+  const toggleMenu = () => {
+    const state = !isMenuOpen;
+    setIsMenuOpen(state);
+    if (state) {
+      setIsAlertOpen(false);
+      setIsAnnouncementOpen(false);
       setOpenDropdown(null);
       setOpenSubDropdown(null);
-    } else {
-      setOpenDropdown(index);
+    }
+  };
+
+  const toggleAlerts = () => {
+    const state = !isAlertOpen;
+    setIsAlertOpen(state);
+    if (state) {
+      setIsAnnouncementOpen(false);
+      setIsMenuOpen(false);
+      setOpenDropdown(null);
       setOpenSubDropdown(null);
     }
+  };
+
+  const toggleAnnouncements = () => {
+    const state = !isAnnouncementOpen;
+    setIsAnnouncementOpen(state);
+    if (state) {
+      setIsAlertOpen(false);
+      setIsMenuOpen(false);
+      setOpenDropdown(null);
+      setOpenSubDropdown(null);
+    }
+  };
+
+  const toggleDropdown = (index: number) => {
+    setOpenDropdown(openDropdown === index ? null : index);
+    setOpenSubDropdown(null);
   };
 
   const toggleSubDropdown = (index: number) => {
-    if (openSubDropdown === index) {
-      setOpenSubDropdown(null);
-    } else {
-      setOpenSubDropdown(index);
-    }
+    setOpenSubDropdown(openSubDropdown === index ? null : index);
   };
-
 
   return (
     <div className="page-container">

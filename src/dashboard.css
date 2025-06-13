@@ -67,7 +67,9 @@ body {
   justify-content: space-between;
   align-items: center;
   color: white;
-  padding: 0.625rem 1.875rem;
+    padding-left: 1.875rem;
+  padding-right: 1.875rem;
+  padding-top: 0.625rem;
     z-index: -1;
 }
 .header-nav {
@@ -117,18 +119,19 @@ body {
 }
 
 .top-nav a {
-  text-decoration: none;
-  color: #3FD28B;
-  font-weight: 500;
-  font-size: 0.875rem; 
-  padding-bottom: 0.3125rem;
-  cursor: pointer;
+      text-decoration: none;
+    color: #3FD28B;
+    font-weight: 500;
+    font-size: 0.875rem;
+    padding-bottom: 1.3125rem;
+    cursor: pointer;
     font-size: 14px;
+    margin-top: 18px
 }
 
 .top-nav a.active {
   color: #ffffff;
-  border-bottom: 0.125rem solid #ffffff;
+  border-bottom: 0.286rem solid #ffffff;
   font-size: 14px;
 }
 
@@ -816,6 +819,10 @@ height: auto;
   font-size: 0.7rem;
   margin-left: 8px;
 }
+.dropdown-arrow img {
+  width: 10px;
+  height: 10px;
+}
 
 /* Submenu */
 .dropdown-submenu {
@@ -924,7 +931,7 @@ height: auto;
 .announcement-scrollable {
   overflow-y: auto;
   height: 400px;
-  padding: 0 8px;
+  /* padding: 0 8px; */
 }
 
 .announcement-item {
@@ -1066,13 +1073,13 @@ height: auto;
 .alert-scrollable {
   overflow-y: auto;
   max-height: 280px;
-  padding: 0 10px;
+  /* padding: 0 10px; */
 }
 
 .alert-card {
   position: relative;
   background-color: white;
-  padding: 10px 12px;
+  padding: 10px 16px;
   margin-bottom: 6px;
   border-radius: 6px;
   font-size: 14px;

@@ -444,7 +444,11 @@ onClick={toggleMenu}
                   >
                     {item.label}
                     <span className="dropdown-arrow">
-                      {openDropdown === index ? "▲" : "▼"}
+                      {openDropdown === index ?(
+                                      <img src="/assets/icons8-expand-arrow-50.svg" alt="Up Arrow" />
+                                    ) : (
+                                      <img src="/assets/down_arrow_nabar.svg" alt="Down Arrow" />
+                                    )}
                     </span>
                   </div>
                   {openDropdown === index && item.subItems && (
@@ -460,8 +464,12 @@ onClick={toggleMenu}
                               >
                                 {subItem.label}
                                 <span className="dropdown-arrow">
-                                  {openSubDropdown === subIndex ? "▲" : "▼"}
-                                </span>
+                                  {openSubDropdown === subIndex ?(
+                                       <img src="/assets/icons8-expand-arrow-50.svg" alt="Up Arrow" />
+                                    ) : (
+                                      <img src="/assets/down_arrow_nabar.svg" alt="Down Arrow" />
+                                    )}
+                                    </span>
                               </div>
                               {openSubDropdown === subIndex && (
                                 <div className="subsubmenu-menu">
